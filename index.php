@@ -252,13 +252,13 @@
                 </a>
                 <ul class="nav nav-treeview">
                   <li class="nav-item">
-                    <a href="./index.html" class="nav-link active">
+                    <a href="./index.php" class="nav-link active">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Data Buku</p>
                     </a>
                   </li>
                   <li class="nav-item">
-                    <a href="./index2.html" class="nav-link">
+                    <a href="./index_kategori.php" class="nav-link">
                       <i class="nav-icon bi bi-circle"></i>
                       <p>Data Kategori</p>
                     </a>

@@ -243,6 +243,27 @@ function login($data){
     }
 }
 
+function tambah_kategori($data){
+    global $conn;
+    $nama = htmlspecialchars($data['nama_kategori']);
+    mysqli_query($conn, "INSERT INTO kategori (nama_kategori) VALUES ('$nama')");
+    return mysqli_affected_rows($conn);
+}
+
+function ubah_kategori($data){
+    global $conn;
+    $id = $data['id_kategori'];
+    $nama = htmlspecialchars($data['nama_kategori']);
+    mysqli_query($conn, "UPDATE kategori SET nama_kategori='$nama' WHERE id_kategori=$id");
+    return mysqli_affected_rows($conn);
+}
+
+function hapus_kategori($id){
+    global $conn;
+    mysqli_query($conn, "DELETE FROM kategori WHERE id_kategori=$id");
+    return mysqli_affected_rows($conn);
+}
+
 
 ?>
 
