@@ -21,7 +21,7 @@
     // $buku = $query;
 
     // konfigurasi
-    $jumlahDataPerHalaman = 4;
+    $jumlahDataPerHalaman = 2;
     $jumlahData = count(query("SELECT * FROM buku"));
     $jumlahHalaman = ceil($jumlahData / $jumlahDataPerHalaman);
     $halamanAktif = ( isset($_GET["halaman"]) ) ? $_GET["halaman"] : 1;
@@ -42,6 +42,7 @@
                 FROM buku
                 JOIN kategori ON buku.id_kategori = kategori.id_kategori
                 WHERE buku.nama_buku LIKE '%$keyword%'
+                LIMIT $awalData, $jumlahDataPerHalaman
               ");
     }
 
@@ -315,11 +316,48 @@
                   <li class="breadcrumb-item"><a href="#">Home</a></li>
                   <li class="breadcrumb-item active" aria-current="page">Data Buku</li>
                 </ol>
+              </div>
+        
+              <div class="col-12 d-flex justify-content-center">
+              <nav aria-label="Page navigation example">
+                    <ul class="pagination" >
+                            <!-- Tombol Previous -->
+                        <?php if ($halamanAktif > 1) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?halaman=<?= $halamanAktif - 1; ?>">&laquo;</a>
+                            </li>
+                        <?php endif; ?>
+
+                <!-- Daftar halaman -->
+                        <?php for ($i = 1; $i <= $jumlahHalaman; $i++) : ?>
+                            <?php if ($i == $halamanAktif) : ?>
+                                <li class="page-item active">
+                                    <a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+                                </li>
+                            <?php else : ?>
+                                <li class="page-item">
+                                    <a class="page-link" href="?halaman=<?= $i; ?>"><?= $i; ?></a>
+                                </li>
+                            <?php endif; ?>
+                        <?php endfor; ?>
+
+
+                        <!-- Tombol Next -->
+                        <?php if ($halamanAktif < $jumlahHalaman) : ?>
+                            <li class="page-item">
+                                <a class="page-link" href="?halaman=<?= $halamanAktif + 1; ?>">&raquo;</a>
+                            </li>
+                        <?php endif; ?>
+                    </ul>
+                </nav>
+                </div>
+              
+            <div class="col-sm-12 d-flex justify-content-end">
                 <form class="mt-2">
                   <div class="input-group">
                   <input 
                     type="text" 
-                    class="form-control" 
+                    class="form-control me-2" 
                     name="keyword" 
                     placeholder="Cari produk..."
                   >
